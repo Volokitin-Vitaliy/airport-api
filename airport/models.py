@@ -1,6 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
-
 from config import settings
 
 
@@ -13,8 +11,12 @@ class Airport(models.Model):
 
 
 class Route(models.Model):
-    source = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name='departures')
-    destination = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name='arrivals')
+    source = models.ForeignKey(
+        Airport, on_delete=models.CASCADE, related_name="departures"
+    )
+    destination = models.ForeignKey(
+        Airport, on_delete=models.CASCADE, related_name="arrivals"
+    )
     distance = models.PositiveIntegerField()
 
     def __str__(self):
@@ -63,9 +65,7 @@ class Flight(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name="orders"
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="orders"
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -80,10 +80,10 @@ class Ticket(models.Model):
     row = models.PositiveIntegerField()
     seat = models.PositiveIntegerField()
     flight = models.ForeignKey(Flight, on_delete=models.CASCADE)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='tickets')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="tickets")
 
     class Meta:
-        unique_together = ('flight', 'row', 'seat')
+        unique_together = ("flight", "row", "seat")
 
     def __str__(self):
         return f"Ticket {self.row}-{self.seat} on flight {self.flight.id}"
