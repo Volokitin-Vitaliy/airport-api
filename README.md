@@ -22,20 +22,17 @@ Django 5.2
 
 Django REST Framework (DRF)
 
-SimpleJWT for authentication
+PostgreSQL
 
-SQLite3 (default database)
+Docker & Docker Compose
 
 ------
 ### Installation:
 
 - git clone https://github.com/<your_username>/airport-api.git
 - cd airport-api
-- python -m venv venv
-- source venv/bin/activate      # or venv\Scripts\activate on Windows
-- pip install -r requirements.txt
-- python manage.py migrate
-- python manage.py runserver
+- docker compose up --build -d
+- docker compose exec airport python manage.py migrate
 ------
 ### Authentication:
 
@@ -63,7 +60,7 @@ Method	Endpoint	Description:
 
 Create a superuser to access the Django admin panel:
 
-- python manage.py createsuperuser
+- docker compose exec airport python manage.py createsuperuser
 
 
 Then go to:
