@@ -31,6 +31,7 @@ Docker & Docker Compose
 
 - git clone https://github.com/<your_username>/airport-api.git
 - cd airport-api
+- cp .env.sample .env
 - docker compose up --build -d
 - docker compose exec airport python manage.py migrate
 ------
